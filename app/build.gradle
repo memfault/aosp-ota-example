@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.memfault.example_ota"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName VERSION_NAME
+
+        buildConfigField "String", "MEMFAULT_API_BASE_URL", "\"$MEMFAULT_API_BASE_URL\""
+        buildConfigField "String", "MEMFAULT_PROJECT_API_KEY", "\"$MEMFAULT_PROJECT_API_KEY\""
+        buildConfigField "int", "CHECK_FOR_UPDATE_INTERVAL_HOURS", "$CHECK_FOR_UPDATE_INTERVAL_HOURS"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation deps.kotlin.stdlib
+    implementation deps.android.work
+    implementation deps.android.preference
+
+    implementation deps.memfault.cloud
+
+    implementation deps.okhttp
+    implementation deps.okio
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.coroutines
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+    testImplementation deps.test.mockWebServer
+}

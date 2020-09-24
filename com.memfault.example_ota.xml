@@ -1,0 +1,8 @@
+<permissions>
+    <allow-in-power-save package="com.memfault.example_ota" />
+    <privapp-permissions package="com.memfault.example_ota">
+        <permission name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+        <permission name="android.permission.REBOOT" />
+        <permission name="android.permission.RECOVERY" />
+    </privapp-permissions>
+</permissions>
